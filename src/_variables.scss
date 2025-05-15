@@ -1,0 +1,59 @@
+// Ana renkler
+$primary: #5a8f3e;
+$primary-dark: #476f32;
+$primary-light: #97c585;
+$secondary: #8c7951;
+$secondary-dark: #6b5d3e;
+$secondary-light: #c6b693;
+
+// Gri tonları
+$dark: #333333;
+$gray-dark: #666666;
+$gray: #999999;
+$gray-light: #cccccc;
+$light: #f8f9fa;
+
+// Accent
+$accent: #d4973b;
+$accent-dark: #c37f23;
+$accent-light: #f1c78d;
+
+// Fonksiyonel renkler
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+
+// Font ailesi
+$font-family: 'Poppins', sans-serif;
+
+// Border radius
+$border-radius: 6px;
+$border-radius-sm: 4px;
+$border-radius-lg: 12px;
+
+// Gölgeler
+$box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+$box-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+$box-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// Container genişlikleri
+$container-sm: 540px;
+$container-md: 720px;
+$container-lg: 960px;
+$container-xl: 1140px;
+
+// Zindex değerleri
+$zindex-dropdown: 1000;
+$zindex-sticky: 1020;
+$zindex-fixed: 1030;
+$zindex-modal-backdrop: 1040;
+$zindex-modal: 1050;
+$zindex-popover: 1060;
+$zindex-tooltip: 1070; 

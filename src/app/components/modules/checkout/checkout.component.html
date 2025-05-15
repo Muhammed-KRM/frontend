@@ -1,0 +1,401 @@
+<div class="container my-5 checkout-container">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="page-title">Ödeme</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+          <li class="breadcrumb-item"><a routerLink="/cart">Sepet</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Ödeme</li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Yükleniyor -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Yükleniyor...</span>
+    </div>
+    <p class="mt-3">Bilgiler yükleniyor...</p>
+  </div>
+
+  <!-- Hata Mesajı -->
+  <div *ngIf="error" class="alert alert-danger my-4">
+    {{ error }}
+  </div>
+  
+  <!-- Boş Sepet -->
+  <div *ngIf="!loading && (!cart || cart.items.length === 0)" class="text-center py-5">
+    <div class="empty-cart-icon mb-4">
+      <i class="fas fa-shopping-cart fa-4x text-muted"></i>
+    </div>
+    <h2 class="h4 mb-3">Sepetiniz Boş</h2>
+    <p class="text-muted mb-4">Ödeme yapmadan önce sepetinize ürün eklemelisiniz.</p>
+    <a routerLink="/products" class="btn btn-primary">Alışverişe Başla</a>
+  </div>
+
+  <!-- Ödeme Formu -->
+  <div *ngIf="!loading && cart && cart.items.length > 0" class="checkout-process">
+    <!-- Adım Göstergesi -->
+    <div class="checkout-steps mb-5">
+      <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+        <div class="step-number">1</div>
+        <div class="step-title">Teslimat Adresi</div>
+      </div>
+      <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+        <div class="step-number">2</div>
+        <div class="step-title">Kargo Seçimi</div>
+      </div>
+      <div class="step" [class.active]="currentStep === 3">
+        <div class="step-number">3</div>
+        <div class="step-title">Ödeme</div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Ödeme Formu -->
+      <div class="col-lg-8">
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form">
+          
+          <!-- 1. Adım: Teslimat Adresi -->
+          <div class="step-content" *ngIf="currentStep === 1">
+            <!-- Teslimat Adresi -->
+            <div class="form-section">
+              <h3 class="section-title"><span class="section-icon"><i class="fas fa-map-marker-alt"></i></span> Teslimat Adresi</h3>
+              
+              <div formGroupName="shippingAddress">
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label for="shipping-fullName" class="form-label required">Ad Soyad</label>
+                    <input type="text" id="shipping-fullName" formControlName="fullName" class="form-control" [class.is-invalid]="isInvalid('fullName', 'shippingAddress')">
+                    <div *ngIf="isInvalid('fullName', 'shippingAddress')" class="invalid-feedback">
+                      Ad soyad gereklidir ve en az 3 karakter içermelidir.
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="shipping-addressLine1" class="form-label required">Adres Satırı 1</label>
+                  <input type="text" id="shipping-addressLine1" formControlName="addressLine1" class="form-control" [class.is-invalid]="isInvalid('addressLine1', 'shippingAddress')">
+                  <div *ngIf="isInvalid('addressLine1', 'shippingAddress')" class="invalid-feedback">
+                    Adres gereklidir.
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="shipping-addressLine2" class="form-label">Adres Satırı 2 (Opsiyonel)</label>
+                  <input type="text" id="shipping-addressLine2" formControlName="addressLine2" class="form-control">
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="shipping-city" class="form-label required">İl</label>
+                    <select id="shipping-city" formControlName="city" class="form-control" (change)="onCityChange('shippingAddress')" [class.is-invalid]="isInvalid('city', 'shippingAddress')">
+                      <option value="">İl Seçiniz</option>
+                      <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                    </select>
+                    <div *ngIf="isInvalid('city', 'shippingAddress')" class="invalid-feedback">
+                      İl seçimi gereklidir.
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 form-group">
+                    <label for="shipping-district" class="form-label required">İlçe</label>
+                    <select id="shipping-district" formControlName="district" class="form-control" [class.is-invalid]="isInvalid('district', 'shippingAddress')">
+                      <option value="">İlçe Seçiniz</option>
+                      <option *ngFor="let district of getDistrictsForCity(checkoutForm.get('shippingAddress.city')?.value)" [value]="district">{{ district }}</option>
+                    </select>
+                    <div *ngIf="isInvalid('district', 'shippingAddress')" class="invalid-feedback">
+                      İlçe seçimi gereklidir.
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <label for="shipping-zipCode" class="form-label required">Posta Kodu</label>
+                    <input type="text" id="shipping-zipCode" formControlName="zipCode" class="form-control" [class.is-invalid]="isInvalid('zipCode', 'shippingAddress')">
+                    <div *ngIf="isInvalid('zipCode', 'shippingAddress')" class="invalid-feedback">
+                      Geçerli bir posta kodu giriniz (5 rakam).
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 form-group">
+                    <label for="shipping-phone" class="form-label required">Telefon</label>
+                    <input type="tel" id="shipping-phone" formControlName="phone" class="form-control" [class.is-invalid]="isInvalid('phone', 'shippingAddress')">
+                    <div *ngIf="isInvalid('phone', 'shippingAddress')" class="invalid-feedback">
+                      Geçerli bir telefon numarası giriniz (10-11 rakam).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Fatura Adresi -->
+            <div class="form-section">
+              <div class="mb-3 form-check">
+                <input type="checkbox" id="sameAsBilling" formControlName="sameAsBilling" class="form-check-input">
+                <label for="sameAsBilling" class="form-check-label">Fatura adresi teslimat adresi ile aynı</label>
+              </div>
+              
+              <div *ngIf="!checkoutForm.get('sameAsBilling')?.value">
+                <h3 class="section-title"><span class="section-icon"><i class="fas fa-file-invoice"></i></span> Fatura Adresi</h3>
+                
+                <div formGroupName="billingAddress">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="billing-fullName" class="form-label required">Ad Soyad</label>
+                      <input type="text" id="billing-fullName" formControlName="fullName" class="form-control" [class.is-invalid]="isInvalid('fullName', 'billingAddress')">
+                      <div *ngIf="isInvalid('fullName', 'billingAddress')" class="invalid-feedback">
+                        Ad soyad gereklidir ve en az 3 karakter içermelidir.
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="billing-addressLine1" class="form-label required">Adres Satırı 1</label>
+                    <input type="text" id="billing-addressLine1" formControlName="addressLine1" class="form-control" [class.is-invalid]="isInvalid('addressLine1', 'billingAddress')">
+                    <div *ngIf="isInvalid('addressLine1', 'billingAddress')" class="invalid-feedback">
+                      Adres gereklidir.
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="billing-addressLine2" class="form-label">Adres Satırı 2 (Opsiyonel)</label>
+                    <input type="text" id="billing-addressLine2" formControlName="addressLine2" class="form-control">
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="billing-city" class="form-label required">İl</label>
+                      <select id="billing-city" formControlName="city" class="form-control" (change)="onCityChange('billingAddress')" [class.is-invalid]="isInvalid('city', 'billingAddress')">
+                        <option value="">İl Seçiniz</option>
+                        <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+                      </select>
+                      <div *ngIf="isInvalid('city', 'billingAddress')" class="invalid-feedback">
+                        İl seçimi gereklidir.
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6 form-group">
+                      <label for="billing-district" class="form-label required">İlçe</label>
+                      <select id="billing-district" formControlName="district" class="form-control" [class.is-invalid]="isInvalid('district', 'billingAddress')">
+                        <option value="">İlçe Seçiniz</option>
+                        <option *ngFor="let district of getDistrictsForCity(checkoutForm.get('billingAddress.city')?.value)" [value]="district">{{ district }}</option>
+                      </select>
+                      <div *ngIf="isInvalid('district', 'billingAddress')" class="invalid-feedback">
+                        İlçe seçimi gereklidir.
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="billing-zipCode" class="form-label required">Posta Kodu</label>
+                      <input type="text" id="billing-zipCode" formControlName="zipCode" class="form-control" [class.is-invalid]="isInvalid('zipCode', 'billingAddress')">
+                      <div *ngIf="isInvalid('zipCode', 'billingAddress')" class="invalid-feedback">
+                        Geçerli bir posta kodu giriniz (5 rakam).
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-6 form-group">
+                      <label for="billing-phone" class="form-label required">Telefon</label>
+                      <input type="tel" id="billing-phone" formControlName="phone" class="form-control" [class.is-invalid]="isInvalid('phone', 'billingAddress')">
+                      <div *ngIf="isInvalid('phone', 'billingAddress')" class="invalid-feedback">
+                        Geçerli bir telefon numarası giriniz (10-11 rakam).
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 2. Adım: Kargo Seçimi -->
+          <div class="step-content" *ngIf="currentStep === 2">
+            <div class="form-section">
+              <h3 class="section-title"><span class="section-icon"><i class="fas fa-truck"></i></span> Kargo Seçimi</h3>
+              
+              <div class="shipping-options">
+                <div *ngFor="let method of shippingMethods" class="shipping-option" [class.selected]="checkoutForm.get('shippingMethod')?.value === method.id" (click)="checkoutForm.get('shippingMethod')?.setValue(method.id); onShippingMethodChange()">
+                  <div class="shipping-option-radio">
+                    <input type="radio" [id]="'shipping-' + method.id" [value]="method.id" formControlName="shippingMethod" class="form-check-input">
+                  </div>
+                  <div class="shipping-option-icon">
+                    <i [class]="method.icon"></i>
+                  </div>
+                  <div class="shipping-option-details">
+                    <div class="shipping-option-title">{{ method.name }}</div>
+                    <div class="shipping-option-description">{{ method.description }}</div>
+                    <div class="shipping-option-delivery">Tahmini Teslimat: {{ method.estimatedDelivery }}</div>
+                  </div>
+                  <div class="shipping-option-price">
+                    <span *ngIf="method.price > 0">{{ method.price | currency:'TRY':'symbol-narrow':'.0-0' }}</span>
+                    <span *ngIf="method.price === 0">Ücretsiz</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="form-section">
+              <h3 class="section-title"><span class="section-icon"><i class="fas fa-clipboard-list"></i></span> Sipariş Notu (Opsiyonel)</h3>
+              
+              <div class="form-group">
+                <label for="notes" class="form-label">Sipariş hakkında eklemek istediğiniz notlar</label>
+                <textarea id="notes" formControlName="notes" class="form-control" rows="3" placeholder="Teslimat için özel talimatlarınızı buraya yazabilirsiniz..."></textarea>
+              </div>
+            </div>
+          </div>
+          
+          <!-- 3. Adım: Ödeme -->
+          <div class="step-content" *ngIf="currentStep === 3">
+            <div class="form-section">
+              <h3 class="section-title"><span class="section-icon"><i class="fas fa-credit-card"></i></span> Ödeme Yöntemi</h3>
+              
+              <div class="payment-methods">
+                <div *ngFor="let method of paymentMethods" class="payment-method" [class.selected]="checkoutForm.get('paymentMethod')?.value === method.id" (click)="checkoutForm.get('paymentMethod')?.setValue(method.id)">
+                  <div class="payment-method-radio">
+                    <input type="radio" [id]="'payment-' + method.id" [value]="method.id" formControlName="paymentMethod" class="form-check-input">
+                  </div>
+                  <div class="payment-method-icon">
+                    <i [class]="method.icon"></i>
+                  </div>
+                  <div class="payment-method-details">
+                    <div class="payment-method-title">{{ method.name }}</div>
+                    <div class="payment-method-description">{{ method.description }}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Kredi Kartı Detayları -->
+              <div *ngIf="checkoutForm.get('paymentMethod')?.value === 'credit_card'" formGroupName="cardInfo" class="credit-card-form">
+                <div class="form-group">
+                  <label for="cardholderName" class="form-label required">Kart Üzerindeki İsim</label>
+                  <input type="text" id="cardholderName" formControlName="cardholderName" class="form-control" [class.is-invalid]="isInvalid('cardholderName', 'cardInfo')">
+                  <div *ngIf="isInvalid('cardholderName', 'cardInfo')" class="invalid-feedback">
+                    Kart sahibinin adı gereklidir.
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="cardNumber" class="form-label required">Kart Numarası</label>
+                  <input type="text" id="cardNumber" formControlName="cardNumber" class="form-control" placeholder="XXXX XXXX XXXX XXXX" [class.is-invalid]="isInvalid('cardNumber', 'cardInfo')">
+                  <div *ngIf="isInvalid('cardNumber', 'cardInfo')" class="invalid-feedback">
+                    Geçerli bir kart numarası giriniz (16 rakam).
+                  </div>
+                </div>
+                
+                <div class="card-row">
+                  <div class="card-expiry">
+                    <div class="form-group">
+                      <label for="expiryMonth" class="form-label required">Ay</label>
+                      <select id="expiryMonth" formControlName="expiryMonth" class="form-control" [class.is-invalid]="isInvalid('expiryMonth', 'cardInfo')">
+                        <option value="">Ay</option>
+                        <option *ngFor="let month of [1,2,3,4,5,6,7,8,9,10,11,12]" [value]="month < 10 ? '0' + month : month">
+                          {{ month < 10 ? '0' + month : month }}
+                        </option>
+                      </select>
+                      <div *ngIf="isInvalid('expiryMonth', 'cardInfo')" class="invalid-feedback">
+                        Ay seçiniz.
+                      </div>
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="expiryYear" class="form-label required">Yıl</label>
+                      <select id="expiryYear" formControlName="expiryYear" class="form-control" [class.is-invalid]="isInvalid('expiryYear', 'cardInfo')">
+                        <option value="">Yıl</option>
+                        <option *ngFor="let year of [2023,2024,2025,2026,2027,2028,2029,2030]" [value]="year">
+                          {{ year }}
+                        </option>
+                      </select>
+                      <div *ngIf="isInvalid('expiryYear', 'cardInfo')" class="invalid-feedback">
+                        Yıl seçiniz.
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="cvv" class="form-label required">CVV</label>
+                    <input type="text" id="cvv" formControlName="cvv" class="form-control" placeholder="XXX" [class.is-invalid]="isInvalid('cvv', 'cardInfo')">
+                    <div *ngIf="isInvalid('cvv', 'cardInfo')" class="invalid-feedback">
+                      Geçerli bir CVV giriniz (3-4 rakam).
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Butonlar -->
+          <div class="d-flex justify-content-between mt-4">
+            <button *ngIf="currentStep > 1" type="button" class="btn btn-outline-secondary btn-action" (click)="prevStep()">
+              <i class="fas fa-arrow-left me-2"></i> Geri
+            </button>
+            <div *ngIf="currentStep === 1" class="invisible btn"></div>
+            
+            <button *ngIf="currentStep < 3" type="button" class="btn btn-primary btn-action" (click)="nextStep()">
+              İleri <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+            <button *ngIf="currentStep === 3" type="submit" class="btn btn-primary btn-action">
+              <i class="fas fa-lock me-2"></i> Ödemeyi Tamamla
+            </button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Sipariş Özeti -->
+      <div class="col-lg-4">
+        <div class="order-summary">
+          <h3 class="summary-title">Sipariş Özeti</h3>
+          
+          <div *ngIf="cart && cart.items.length > 0">
+            <div class="summary-items mb-4">
+              <div *ngFor="let item of cart.items" class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <span class="fw-medium">{{ item.quantity }}x</span> {{ item.productName }}
+                </div>
+                <div>{{ item.totalPrice | currency:'TRY':'symbol-narrow':'.0-0' }}</div>
+              </div>
+            </div>
+            
+            <div class="summary-item">
+              <div class="summary-item-label">Ara Toplam</div>
+              <div class="summary-item-value">{{ subtotal | currency:'TRY':'symbol-narrow':'.0-0' }}</div>
+            </div>
+            
+            <div class="summary-item">
+              <div class="summary-item-label">Kargo</div>
+              <div *ngIf="shipping > 0" class="summary-item-value">{{ shipping | currency:'TRY':'symbol-narrow':'.0-0' }}</div>
+              <div *ngIf="shipping === 0" class="summary-item-value text-success">Ücretsiz</div>
+            </div>
+            
+            <div *ngIf="subtotal >= 500" class="free-shipping-alert">
+              <i class="fas fa-check-circle"></i> 500 TL üzeri alışverişlerde kargo ücretsiz!
+            </div>
+            
+            <div *ngIf="subtotal < 500" class="shipping-progress">
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" [style.width]="(subtotal/500*100) + '%'" [attr.aria-valuenow]="subtotal/500*100" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+              <div class="progress-text">
+                {{ 500 - subtotal | currency:'TRY':'symbol-narrow':'.0-0' }} daha ekleyin, ücretsiz kargo kazanın!
+              </div>
+            </div>
+            
+            <div class="summary-total">
+              <div class="summary-total-label">Toplam</div>
+              <div class="summary-total-value">{{ total | currency:'TRY':'symbol-narrow':'.0-0' }}</div>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <a routerLink="/cart" class="btn btn-outline-secondary w-100">
+              <i class="fas fa-shopping-cart me-2"></i> Sepete Dön
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

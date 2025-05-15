@@ -1,0 +1,97 @@
+<div class="container p-0 mainBody" style="border-right: 1px dashed #6ec7ff; border-left: 1px dashed #6ec7ff;">
+  <!-- Hero Banner -->
+  <section class="hero-placeholder">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold text-white mb-3" style="margin-top: 13%;">İletişim</h1>
+          <p class="lead text-white mb-4">Bizimle iletişime geçin, size yardımcı olmaktan mutluluk duyarız</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dalga Efekti Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- İletişim Bilgileri ve Form Section -->
+  <section class="section-marine">
+    <div class="container">
+      <div class="row g-4">
+        <!-- İletişim Bilgileri -->
+        <div class="col-lg-4">
+          <div class="contact-info p-4">
+            <h2 class="section-heading mb-4">İletişim Bilgileri</h2>
+            <div class="mb-4">
+              <h3 class="h5 mb-3"><i class="fas fa-map-marker-alt text-marine me-2"></i>Adres</h3>
+              <p>{{ contactInfo.address }}<br>{{ contactInfo.city }}</p>
+            </div>
+            <div class="mb-4">
+              <h3 class="h5 mb-3"><i class="fas fa-phone text-marine me-2"></i>Telefon</h3>
+              <p><a href="tel:{{ contactInfo.phone }}" class="text-decoration-none">{{ contactInfo.phone }}</a></p>
+            </div>
+            <div class="mb-4">
+              <h3 class="h5 mb-3"><i class="fas fa-envelope text-marine me-2"></i>E-posta</h3>
+              <p><a href="mailto:{{ contactInfo.email }}" class="text-decoration-none">{{ contactInfo.email }}</a></p>
+            </div>
+            <div class="mb-4">
+              <h3 class="h5 mb-3"><i class="fas fa-clock text-marine me-2"></i>Çalışma Saatleri</h3>
+              <p>{{ contactInfo.workingHours }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- İletişim Formu -->
+        <div class="col-lg-8">
+          <div class="contact-form p-4">
+            <h2 class="section-heading mb-4">Bize Ulaşın</h2>
+            <form (ngSubmit)="onSubmit()">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name" class="form-label">Adınız Soyadınız</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="contactForm.name" name="name" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="email" class="form-label">E-posta Adresiniz</label>
+                    <input type="email" class="form-control" id="email" [(ngModel)]="contactForm.email" name="email" required>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="subject" class="form-label">Konu</label>
+                    <input type="text" class="form-control" id="subject" [(ngModel)]="contactForm.subject" name="subject" required>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="message" class="form-label">Mesajınız</label>
+                    <textarea class="form-control" id="message" rows="5" [(ngModel)]="contactForm.message" name="message" required></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-marine">Gönder</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Harita Section -->
+  <section class="section-marine blue-bg">
+    <div class="container">
+      <h2 class="section-heading text-center mb-4">Bizi Ziyaret Edin</h2>
+      <div class="map-container">
+        <!-- Google Maps iframe buraya eklenecek -->
+        <div class="map-placeholder">
+          <p class="text-center">Harita burada görüntülenecek</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div> 

@@ -1,0 +1,529 @@
+/* Renk değişkenleri */
+$marine-primary: #0072bc;
+$marine-secondary: #00a0e3;
+$marine-accent: #ffd700;
+$marine-text-dark: #333333;
+$marine-text-light: #ffffff;
+$marine-bg-light: #f8fcff;
+$marine-gradient: linear-gradient(135deg, $marine-primary, $marine-secondary);
+
+/* Marin Yat Bileşeni Stilleri */
+.mainBody {
+  color: $marine-text-dark;
+  font-family: 'Roboto', sans-serif;
+  background-color: $marine-bg-light;
+}
+
+/* Hero Section için iyileştirilmiş stiller */
+.hero-section {
+  background-image: linear-gradient(rgba(0, 45, 98, 0.7), rgba(0, 114, 188, 0.5)), url('/assets/images/hero-yacht.jpg');
+  background-size: cover;
+  background-position: center;
+  color: $marine-text-light;
+  position: relative;
+  overflow: hidden;
+  
+  /* Carousel Stiller */
+  .carousel-item {
+    height: 600px;
+    
+    &.active {
+      .carousel-content {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+  
+  .carousel-content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.8s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    
+    /* Her slide için farklı arkaplan resmi */
+    &:nth-child(1) {
+      background-image: linear-gradient(rgba(0, 45, 98, 0.7), rgba(0, 114, 188, 0.5)), url('/assets/images/hero-yacht.jpg');
+    }
+  }
+  
+  .carousel-item:nth-child(2) .carousel-content {
+    background-image: linear-gradient(rgba(0, 59, 107, 0.7), rgba(0, 160, 227, 0.5)), url('/assets/images/yacht-2.jpg');
+  }
+  
+  .carousel-item:nth-child(3) .carousel-content {
+    background-image: linear-gradient(rgba(0, 70, 128, 0.7), rgba(10, 110, 190, 0.5)), url('/assets/images/yacht-3.jpg');
+  }
+  
+  .carousel-indicators {
+    bottom: 30px;
+    
+    button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin: 0 6px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+      
+      &.active {
+        background-color: $marine-text-light;
+        width: 14px;
+        height: 14px;
+        transform: translateY(-1px);
+      }
+      
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+  
+  .carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    opacity: 0;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      opacity: 1;
+      
+      .carousel-control-prev-icon, .carousel-control-next-icon {
+        transform: scale(1.2);
+      }
+    }
+    
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      width: 40px;
+      height: 40px;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &:hover {
+    .carousel-control-prev, .carousel-control-next {
+      opacity: 0.7;
+    }
+  }
+  
+  h1 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s;
+    font-size: 3rem;
+    letter-spacing: -0.5px;
+  }
+  
+  p {
+    font-size: 1.25rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1.2s;
+    line-height: 1.6;
+    max-width: 80%;
+  }
+  
+  .btn-marine {
+    background-color: $marine-primary;
+    border-color: $marine-primary;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 1.4s;
+    padding: 12px 25px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    
+    &:hover {
+      background-color: darken($marine-primary, 10%);
+      border-color: darken($marine-primary, 10%);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    &:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  .btn-outline-light {
+    font-weight: 600;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.6s;
+    padding: 12px 25px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-size: 0.95rem;
+    border-width: 2px;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    &:active {
+      transform: translateY(-1px);
+    }
+  }
+}
+
+/* Wave Divider */
+.wave-divider {
+  display: block;
+  width: 100%;
+  height: 60px;
+  margin-top: -1px;
+  margin-bottom: -1px;
+}
+
+/* Yat Koleksiyonu */
+.section-heading {
+  color: $marine-primary;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  position: relative;
+  
+  &::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: $marine-gradient;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+}
+
+.marine-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s;
+  height: 100%;
+  border: none;
+  background-color: white;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .card-title {
+    color: $marine-primary;
+    font-weight: 600;
+    font-size: 1.25rem;
+    border-bottom: 2px solid rgba($marine-secondary, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .placeholder-image {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $marine-primary;
+    font-weight: 500;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .yacht-specs {
+    font-size: 0.9rem;
+    
+    i {
+      width: 18px;
+      text-align: center;
+      margin-right: 5px;
+      color: $marine-primary;
+    }
+    
+    span {
+      color: $marine-text-dark;
+    }
+  }
+  
+  .text-marine {
+    color: $marine-primary;
+    font-weight: 500;
+  }
+  
+  .badge.bg-marine {
+    background-color: $marine-primary;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.5em 0.8em;
+  }
+  
+  .btn-outline-marine {
+    color: $marine-primary;
+    border-color: $marine-primary;
+    font-weight: 500;
+    transition: all 0.3s;
+    
+    &:hover {
+      background-color: $marine-primary;
+      color: white;
+    }
+  }
+}
+
+/* Hizmetlerimiz Section */
+.section-marine {
+  padding: 60px 0;
+  
+  &.blue-bg {
+    background-color: #eaf5ff;
+    position: relative;
+    
+    .section-heading {
+      color: $marine-primary;
+    }
+    
+    a {
+      color: $marine-primary;
+      text-decoration: none;
+      transition: all 0.3s;
+      font-weight: 500;
+      
+      &:hover {
+        color: darken($marine-primary, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  .icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba($marine-primary, 0.15);
+    transition: all 0.3s;
+    
+    .text-marine {
+      color: $marine-primary;
+    }
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba($marine-primary, 0.2);
+    }
+  }
+}
+
+/* Nasıl Kiralarsınız */
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  background: $marine-gradient;
+  box-shadow: 0 5px 10px rgba($marine-primary, 0.25);
+}
+
+/* İletişim Bölümü */
+.section-marine.blue-bg a {
+  color: $marine-primary;
+  text-decoration: none;
+  transition: all 0.3s;
+  
+  &:hover {
+    color: darken($marine-primary, 10%);
+    text-decoration: underline;
+  }
+  
+  i {
+    color: $marine-primary;
+  }
+}
+
+.placeholder-text {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Responsif düzenlemeler */
+@media (max-width: 992px) {
+  .hero-section {
+    .carousel-item {
+      height: 500px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    p {
+      font-size: 1.15rem;
+      max-width: 90%;
+    }
+    
+    .btn-marine, .btn-outline-light {
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  .section-marine {
+    padding: 40px 0;
+    
+    .section-heading {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .marine-card {
+    margin-bottom: 20px;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    .carousel-item {
+      height: 450px;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+      max-width: 100%;
+    }
+    
+    .btn-marine, .btn-outline-light {
+      padding: 8px 18px;
+      font-size: 0.85rem;
+    }
+    
+    .carousel-indicators {
+      bottom: 15px;
+      
+      button {
+        width: 10px;
+        height: 10px;
+        margin: 0 4px;
+      }
+    }
+  }
+  
+  .section-marine {
+    padding: 40px 0;
+    
+    .section-heading {
+      font-size: 1.8rem;
+    }
+  }
+  
+  .marine-card {
+    margin-bottom: 20px;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
+/* Animasyonlar */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-marine {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Genel Toplamda Çalışacak stiller */
+:host {
+  display: block;
+  
+  ::ng-deep {
+    .btn-marine {
+      background-color: $marine-primary;
+      border-color: $marine-primary;
+      color: white;
+      
+      &:hover {
+        background-color: darken($marine-primary, 10%);
+        border-color: darken($marine-primary, 10%);
+      }
+    }
+    
+    .text-marine {
+      color: $marine-primary !important;
+    }
+    
+    .bg-marine {
+      background-color: $marine-primary !important;
+    }
+  }
+}
+
+/* Yeni animasyonlar */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(-50px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(50px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}

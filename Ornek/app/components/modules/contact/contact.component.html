@@ -1,0 +1,80 @@
+<div class="container p-0 mainBody" style="border-right: 1px dashed #6ec7ff; border-left: 1px dashed #6ec7ff;">
+  <!-- Hero Banner -->
+  <section class="hero-placeholder">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold text-white mb-3" style="margin-top: 13%;">İletişim</h1>
+          <p class="lead text-white mb-4">Sorularınız ve talepleriniz için bize ulaşın</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dalga Efekti Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- İletişim Bilgileri ve Form -->
+  <section class="section-marine">
+    <div class="container">
+      <div class="row">
+ 
+        <!-- İletişim Bilgileri -->
+        <div class="col-lg-5">
+          <div class="ps-lg-4">
+            <h2 class="section-heading">İletişim Bilgilerimiz</h2>
+            <p class="mb-4">Telefon veya e-posta yoluyla doğrudan bize ulaşabilir veya ofislerimizi ziyaret edebilirsiniz.</p>
+            
+            <div class="card marine-card mb-4">
+              <div class="card-body">
+                <h3 class="h5 mb-3"><i class="bi bi-headset text-marine me-2"></i> Müşteri Hizmetleri</h3>
+                <p class="mb-2"><i class="bi bi-telephone-fill text-marine me-2"></i> +90 444 0 123</p>
+                <p class="mb-2"><i class="bi bi-envelope-fill text-marine me-2"></i> info&#64;marinagroup.com</p>
+                <p class="mb-0"><i class="bi bi-whatsapp text-marine me-2"></i> +90 555 123 4567</p>
+              </div>
+            </div>
+            
+            <div class="card marine-card">
+              <div class="card-body">
+                <h3 class="h5 mb-3"><i class="bi bi-clock text-marine me-2"></i> Çalışma Saatleri</h3>
+                <p class="mb-2">Pazartesi - Cuma: 09:00 - 18:00</p>
+                <p class="mb-0">Cumartesi: 09:00 - 13:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofis Lokasyonları -->
+  <section class="section-marine blue-bg py-5">
+    <div class="container">
+      <h2 class="section-heading text-center">Ofislerimiz</h2>
+      <div class="row g-4">
+        <div class="col-md-4 mb-4" *ngFor="let office of officeLocations">
+          <div class="card marine-card h-100">
+            <div class="card-body p-4">
+              <h3 class="h5 card-title mb-3">{{office.city}}</h3>
+              <p class="mb-2"><i class="bi bi-geo-alt text-marine me-2"></i> {{office.address}}</p>
+              <p class="mb-2"><i class="bi bi-telephone-fill text-marine me-2"></i> {{office.phone}}</p>
+              <p class="mb-2"><i class="bi bi-envelope-fill text-marine me-2"></i> {{office.email}}</p>
+              <p class="mb-0"><i class="bi bi-clock text-marine me-2"></i> {{office.hours}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Harita -->
+  <section class="section-marine">
+    <div class="container">
+      <h2 class="section-heading text-center">Bize Ulaşın</h2>
+      <div class="image-placeholder rounded shadow" style="min-height: 400px;">
+        <!-- Buraya Google Harita gelecek -->
+        <div class="placeholder-text">Google Harita</div>
+      </div>
+    </div>
+  </section>
+</div>

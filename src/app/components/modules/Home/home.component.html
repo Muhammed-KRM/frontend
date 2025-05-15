@@ -1,0 +1,154 @@
+<div class="container-fluid p-0">
+  <!-- Hero Banner -->
+  <section class="hero-banner">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-6">
+          <h1 class="display-4 fw-bold text-white mb-3">Geyikli Zeytinyağı</h1>
+          <p class="lead text-white mb-4">Doğanın Mucizesi Zeytinlerden, Sofranıza En Saf Haliyle</p>
+          <div class="d-grid gap-2 d-sm-flex mb-5">
+            <a routerLink="/products" class="btn btn-primary btn-lg px-4 me-sm-3">Ürünlerimiz</a>
+            <a routerLink="/about" class="btn btn-outline-light btn-lg px-4">Hakkımızda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kategoriler Bölümü -->
+  <section class="section-categories py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Ürün Kategorilerimiz</h2>
+          <p class="section-subtitle">En kaliteli doğal ürünlerimizi keşfedin</p>
+        </div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-6 col-md-4 col-lg-2" *ngFor="let category of categories">
+          <a [routerLink]="['/products', category.slug]" class="category-card">
+            <div class="card h-100 text-center border-0">
+              <div class="category-icon">
+                <i [class]="category.icon"></i>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title h5">{{category.name}}</h3>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Öne Çıkan Ürünler -->
+  <section class="section-featured py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Öne Çıkan Ürünlerimiz</h2>
+          <p class="section-subtitle">En çok tercih edilen ürünlerimizden bir seçki</p>
+        </div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" *ngFor="let product of featuredProducts">
+          <div class="product-card card h-100">
+            <div class="position-relative">
+              <img [src]="product.image || 'assets/images/products/placeholder.jpg'" class="card-img-top product-img" [alt]="product.name">
+              <button class="btn btn-add-to-cart" (click)="addToCart(product)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title h5">{{ product.name }}</h3>
+              <p class="product-description">{{ product.description }}</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="product-price">{{ product.price | currency:'TRY':'symbol-narrow':'.0-0' }}</span>
+                <a [routerLink]="['/products', product.id]" class="btn btn-outline-primary btn-sm">İncele</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <a routerLink="/products" class="btn btn-primary">Tüm Ürünleri Gör</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Neden Biz? -->
+  <section class="section-why-us py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Neden Geyikli Zeytinyağı?</h2>
+          <p class="section-subtitle">Kaliteli, doğal ve lezzetli ürünlerimizle fark yaratıyoruz</p>
+        </div>
+      </div>
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <img src="assets/images/about-zeytin.jpg" alt="Zeytin Ağacı" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-4">
+            <div class="col-md-6" *ngFor="let feature of features">
+              <div class="feature-card p-4 h-100">
+                <div class="feature-icon mb-3">
+                  <i [class]="feature.icon"></i>
+                </div>
+                <h3 class="h5 mb-3">{{ feature.title }}</h3>
+                <p class="mb-0">{{ feature.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Müşteri Yorumları -->
+  <section class="section-testimonials py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center mb-5">
+          <h2 class="section-title">Müşteri Yorumları</h2>
+          <p class="section-subtitle">Müşterilerimizin deneyimleri</p>
+        </div>
+      </div>
+      <div class="row g-4 justify-content-center">
+        <div class="col-lg-4 col-md-6" *ngFor="let review of customerReviews">
+          <div class="testimonial-card p-4">
+            <div class="testimonial-rating mb-3">
+              <i class="fas fa-star" *ngFor="let star of [1,2,3,4,5]" [class.text-muted]="star > review.rating"></i>
+            </div>
+            <p class="testimonial-text mb-4">"{{ review.comment }}"</p>
+            <div class="testimonial-user d-flex align-items-center">
+              <div class="testimonial-avatar me-3">
+                <i class="fas fa-user-circle fa-2x"></i>
+              </div>
+              <div>
+                <h4 class="h6 mb-0">{{ review.userName }}</h4>
+                <p class="small text-muted mb-0">{{ review.date | date }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- İletişim CTA -->
+  <section class="section-cta py-5">
+    <div class="container text-center">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h2 class="section-title text-white">Özel Siparişleriniz İçin Bize Ulaşın</h2>
+          <p class="text-white mb-4">Toplu alımlar ve özel siparişler için bize ulaşabilirsiniz.</p>
+          <a routerLink="/contact" class="btn btn-light btn-lg">İletişime Geçin</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

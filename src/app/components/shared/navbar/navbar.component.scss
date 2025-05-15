@@ -1,0 +1,187 @@
+@use '../../../../_variables.scss' as *;
+
+// Top Bar Stilleri
+.top-bar {
+  background-color: $primary; // Görseldeki gibi koyu yeşil tonu
+  padding: 0.6rem 0;
+  color: white;
+  font-size: 0.85rem;
+
+  a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: rgba(white, 0.8);
+    }
+  }
+
+  .social-icons a i {
+    font-size: 1rem;
+  }
+
+  .btn-outline-light {
+    border-color: rgba(white, 0.5);
+    color: white;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+
+    &:hover {
+      background-color: rgba(white, 0.1);
+      border-color: white;
+    }
+  }
+  .dropdown-menu{
+    font-size: 0.9rem;
+    .dropdown-item{
+        &:hover, &:focus, &.active {
+            background-color: rgba($primary, 0.1);
+            color: $primary; 
+        }
+    }
+  }
+
+  .btn-danger {
+    background-color: $danger; // Görseldeki kırmızı/bordo tonu
+    border-color: $danger;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+
+    &:hover {
+      background-color: darken($danger, 10%);
+      border-color: darken($danger, 10%);
+    }
+  }
+}
+
+// Ana Navigasyon Stilleri
+.main-nav {
+  background-color: white; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  padding: 0.5rem 0; // Daha ince bir navbar için padding ayarı
+  transition: all 0.3s ease;
+
+  .navbar-brand .logo {
+    height: 60px; // Logo yüksekliği, görsele göre ayarlanabilir
+  }
+
+  .nav-link {
+    color: #333;
+    font-weight: 600; // Daha belirgin menü linkleri
+    padding: 0.75rem 1rem;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+
+    &:hover,
+    &.active {
+      color: $primary;
+    }
+  }
+
+  .dropdown-menu {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 0.3rem;
+    margin-top: 0.25rem; 
+
+    .dropdown-item {
+      padding: 0.6rem 1.5rem;
+      color: #333;
+      font-size: 0.9rem;
+
+      &:hover,
+      &:focus,
+      &.active {
+        background-color: rgba($primary, 0.05); // Hafif hover efekti
+        color: $primary;
+      }
+    }
+  }
+
+  .cart-link,
+  .search-icon {
+    font-size: 1.2rem;
+    padding-left: 0.8rem;
+    padding-right: 0.8rem;
+  }
+
+  .cart-link {
+    position: relative;
+
+    &[data-count]::after {
+      content: attr(data-count);
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: $danger; 
+      color: white;
+      font-size: 0.7rem;
+      font-weight: bold;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      padding: 2px;
+    }
+  }
+
+  .navbar-toggler {
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+
+    &:focus {
+      box-shadow: none;
+    }
+    // Toggler ikonu için gerekirse daha fazla stil eklenebilir
+  }
+}
+
+// Responsive düzenlemeler
+@media (max-width: 991px) {
+  .main-nav .navbar-collapse {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+  }
+
+  .main-nav .nav-link {
+    padding: 0.75rem 0;
+  }
+
+  .main-nav .dropdown-menu {
+    box-shadow: none;
+    padding: 0 0 0 1rem;
+    background: transparent;
+    margin-top: 0.5rem;
+
+    .dropdown-item {
+      padding: 0.5rem 0;
+    }
+  }
+  .top-bar{
+    font-size: 0.75rem;
+    .contact-info{
+        flex-direction: column;
+        align-items: flex-start !important;
+        a{
+            margin-bottom: 0.25rem;
+        }
+    }
+    .top-right-links{
+        flex-direction: column;
+        align-items: flex-end !important;
+        .social-icons{
+            margin-bottom: 0.5rem;
+            margin-right: 0 !important;
+        }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+<div class="container p-0 mainBody">
+  <!-- Hero Banner -->
+  <section class="hero-placeholder">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1 class="display-4 fw-bold text-white mb-3" style="margin-top: 13%;">Asmalı Ev (Bağ Evi)</h1>
+          <p class="lead text-white mb-4">Denize sıfır lüks konaklama ve özel iskele avantajıyla benzersiz bir tatil deneyimi</p>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="#contact" class="btn btn-outline-light btn-lg px-4 me-sm-3">Rezervasyon Yap</a>
+            <a href="#gallery" class="btn btn-outline-light btn-lg px-4">Galeriyi Görüntüle</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dalga Efekti Divider -->
+  <div class="wave-divider"></div>
+
+  <!-- Tanıtım Section -->
+  <section class="section-marine">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="image-placeholder rounded shadow" style="min-height: 400px;"></div>
+        </div>
+        <div class="col-lg-6">
+          <h2 class="section-heading">Denize Sıfır Lüks Yaşam</h2>
+          <p class="mb-4">Asmalı Ev, denize sıfır konumuyla marina misafirlerine özel bir konaklama deneyimi sunuyor. Özel iskele avantajıyla teknenizden doğrudan eve erişim sağlayabilirsiniz.</p>
+          <p class="mb-4">400 m² kapalı alan, 1200 m² bahçe içerisinde konumlandırılan lüks bağ evi, hem tatil hem de özel etkinlikleriniz için mükemmel bir seçenektir.</p>
+          <div class="row g-3 mb-4">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-marine fs-4 me-2"></i>
+                <span>Tamamen Yenilenmiş</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-marine fs-4 me-2"></i>
+                <span>Deniz Manzaralı</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-marine fs-4 me-2"></i>
+                <span>Özel İskele</span>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-marine fs-4 me-2"></i>
+                <span>4 Yatak Odası</span>
+              </div>
+            </div>
+          </div>
+          <a href="#contact" class="btn btn-marine">Rezervasyon Bilgileri</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Özellikler Section -->
+  <section class="section-marine blue-bg py-5">
+    <div class="container">
+      <h2 class="section-heading text-center">Özellikler ve Hizmetler</h2>
+      <div class="row g-4">
+        <div class="col-md-4 mb-4" *ngFor="let feature of features">
+          <div class="card marine-card h-100">
+            <div class="card-body text-center p-4">
+              <i class="{{ feature.icon }} text-marine fs-1 mb-3"></i>
+              <h3 class="h5 card-title">{{ feature.title }}</h3>
+              <p class="card-text">{{ feature.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri Section -->
+  <section id="gallery" class="section-marine">
+    <div class="container">
+      <h2 class="section-heading text-center">Bağ Evi Galerisi</h2>
+      <div class="row g-4">
+        <div class="col-md-4 mb-4">
+          <div class="image-placeholder rounded shadow"></div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="image-placeholder rounded shadow"></div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="image-placeholder rounded shadow"></div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="image-placeholder rounded shadow"></div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="image-placeholder rounded shadow"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rezervasyon Section 
+  <section id="contact" class="section-marine blue-bg py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="section-heading text-center">Rezervasyon İçin</h2>
+          <p class="mb-5">Asmalı Ev rezervasyonları için lütfen aşağıdaki iletişim kanallarından bizimle irtibata geçin. Size en uygun tarihleri ve özel isteklerinizi değerlendirmekten memnuniyet duyarız.</p>
+          <div class="row g-4">
+            <div class="col-md-6 mb-4">
+              <div class="card marine-card h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-telephone text-marine fs-1 mb-3"></i>
+                  <h3 class="h5 card-title">Telefon</h3>
+                  <p class="card-text">+90 555 123 4567</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 mb-4">
+              <div class="card marine-card h-100">
+                <div class="card-body text-center p-4">
+                  <i class="bi bi-envelope text-marine fs-1 mb-3"></i>
+                  <h3 class="h5 card-title">E-posta</h3>
+                  <p class="card-text">rezervasyon&#64;marinaev.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  -->
+</div> 

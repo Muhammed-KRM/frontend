@@ -1,0 +1,326 @@
+<div class="container my-5">
+  <!-- Yükleniyor -->
+  <div *ngIf="loading" class="text-center py-5">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Yükleniyor...</span>
+    </div>
+    <p class="mt-3">Ürün detayları yükleniyor...</p>
+  </div>
+
+  <!-- Hata Mesajı -->
+  <div *ngIf="error" class="alert alert-danger my-4">
+    {{ error }}
+  </div>
+
+  <!-- Ürün Detayı -->
+  <div *ngIf="!loading && product" class="product-detail">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+        <li class="breadcrumb-item"><a routerLink="/products">Ürünler</a></li>
+        <li class="breadcrumb-item"><a [routerLink]="['/products/category', product.category]">{{ product.category }}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+      </ol>
+    </nav>
+
+    <!-- Ürün Ana Bölüm -->
+    <div class="row">
+      <!-- Ürün Görseli -->
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="product-image-container">
+          <img [src]="product.image || 'assets/images/products/placeholder.jpg'" [alt]="product.name" class="product-image img-fluid rounded">
+          <div class="product-badges" *ngIf="product.stock > 0">
+            <span class="badge bg-success">Stokta</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Ürün Bilgileri -->
+      <div class="col-lg-6">
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        <div class="product-price mb-4">
+          <span class="current-price">{{ product.price | currency:'TRY':'symbol-narrow':'.0-0' }}</span>
+        </div>
+        
+        <div class="product-short-description mb-4">
+          <p>{{ product.description }}</p>
+        </div>
+        
+        <div class="product-meta mb-4">
+          <div class="meta-item d-flex align-items-center mb-2">
+            <span class="meta-label">Kategori:</span>
+            <a [routerLink]="['/products/category', product.category]" class="meta-value">{{ product.category }}</a>
+          </div>
+          <div class="meta-item d-flex align-items-center mb-2">
+            <span class="meta-label">Stok Durumu:</span>
+            <span class="meta-value" [class.text-success]="product.stock > 0" [class.text-danger]="product.stock <= 0">
+              {{ product.stock > 0 ? 'Stokta' : 'Tükendi' }}
+            </span>
+          </div>
+        </div>
+        
+        <!-- Miktar Kontrolü -->
+        <div class="quantity-control mb-4" *ngIf="product.stock > 0">
+          <div class="d-flex align-items-center">
+            <span class="me-3">Miktar:</span>
+            <div class="quantity-input-group d-flex">
+              <button class="btn btn-quantity" (click)="decreaseQuantity()">-</button>
+              <input type="number" [value]="quantity" min="1" [max]="product.stock" (change)="onQuantityChange($event)" class="form-control quantity-input">
+              <button class="btn btn-quantity" (click)="increaseQuantity()">+</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Sepete Ekle Butonu -->
+        <div class="product-actions mb-4">
+          <button class="btn btn-primary btn-lg" [disabled]="product.stock <= 0" (click)="addToCart()">
+            <i class="fas fa-shopping-cart me-2"></i> Sepete Ekle
+          </button>
+        </div>
+        
+        <!-- Güvenli Alışveriş -->
+        <div class="secure-shopping">
+          <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-truck text-primary me-2"></i>
+            <span>500 TL üzeri alışverişlerde kargo ücretsiz</span>
+          </div>
+          <div class="d-flex align-items-center mb-2">
+            <i class="fas fa-shield-alt text-primary me-2"></i>
+            <span>Güvenli ödeme</span>
+          </div>
+          <div class="d-flex align-items-center">
+            <i class="fas fa-leaf text-primary me-2"></i>
+            <span>%100 Doğal Ürün</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Ürün Tabları -->
+    <div class="product-tabs mt-5">
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTab === 'description'" (click)="setActiveTab('description')" type="button">
+            Ürün Açıklaması
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTab === 'details'" (click)="setActiveTab('details')" type="button">
+            Ürün Özellikleri
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" [class.active]="activeTab === 'reviews'" (click)="setActiveTab('reviews')" type="button">
+            Yorumlar
+          </button>
+        </li>
+      </ul>
+      
+      <div class="tab-content p-4 border border-top-0 rounded-bottom">
+        <!-- Ürün Açıklaması Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'description'" [class.active]="activeTab === 'description'">
+          <h3 class="h5 mb-4">{{ product.name }} Hakkında</h3>
+          <p>{{ product.description }}</p>
+          <p>Erken hasat döneminde elle toplanan zeytinler, kısa süre içerisinde soğuk sıkım yöntemiyle işlenerek besin değerlerini ve aromasını koruyan premium bir zeytinyağı elde edilmektedir. Düşük asit oranı ve yüksek antioksidan değeri ile sağlıklı bir yaşam için ideal bir seçimdir.</p>
+          <p>Zeytinyağımız, geleneksel yöntemlerle üretilir ve herhangi bir katkı maddesi içermez. Salatalarda, zeytinyağlı yemeklerde ve soğuk tüketimde kullanıma uygundur.</p>
+        </div>
+        
+        <!-- Ürün Özellikleri Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'details'" [class.active]="activeTab === 'details'">
+          <h3 class="h5 mb-4">Ürün Özellikleri</h3>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="product-features-list">
+                <li><strong>Türü:</strong> Natürel Sızma Zeytinyağı</li>
+                <li><strong>Asit Oranı:</strong> Max 0.8%</li>
+                <li><strong>Hasat Türü:</strong> Erken Hasat</li>
+                <li><strong>Sıkım Yöntemi:</strong> Soğuk Sıkım</li>
+                <li><strong>Zeytin Çeşidi:</strong> Ayvalık (Edremit)</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="product-features-list">
+                <li><strong>Menşei:</strong> Türkiye</li>
+                <li><strong>Bölge:</strong> Ayvalık/Edremit</li>
+                <li><strong>Hacim:</strong> {{ product.name.includes('1L') ? '1 Litre' : product.name.includes('2L') ? '2 Litre' : product.name.includes('5L') ? '5 Litre' : '500 ml' }}</li>
+                <li><strong>Ambalaj:</strong> {{ product.name.includes('L') ? 'Teneke Kutu' : 'Cam Şişe' }}</li>
+                <li><strong>Saklama Koşulları:</strong> Serin ve kuru ortamda muhafaza ediniz</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Yorumlar Tab -->
+        <div class="tab-pane fade" [class.show]="activeTab === 'reviews'" [class.active]="activeTab === 'reviews'">
+          <h3 class="h5 mb-4">Müşteri Yorumları</h3>
+          
+          <div class="reviews-summary mb-4">
+            <div class="row align-items-center">
+              <div class="col-md-4 text-center">
+                <div class="overall-rating">
+                  <div class="rating-value">4.8</div>
+                  <div class="rating-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                  </div>
+                  <div class="rating-count">28 değerlendirme</div>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <div class="rating-bars">
+                  <div class="rating-bar-item d-flex align-items-center mb-2">
+                    <div class="rating-label">5 Yıldız</div>
+                    <div class="progress mx-2" style="height: 10px; flex-grow: 1;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 80%"></div>
+                    </div>
+                    <div class="rating-count">24</div>
+                  </div>
+                  <div class="rating-bar-item d-flex align-items-center mb-2">
+                    <div class="rating-label">4 Yıldız</div>
+                    <div class="progress mx-2" style="height: 10px; flex-grow: 1;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 10%"></div>
+                    </div>
+                    <div class="rating-count">3</div>
+                  </div>
+                  <div class="rating-bar-item d-flex align-items-center mb-2">
+                    <div class="rating-label">3 Yıldız</div>
+                    <div class="progress mx-2" style="height: 10px; flex-grow: 1;">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 3%"></div>
+                    </div>
+                    <div class="rating-count">1</div>
+                  </div>
+                  <div class="rating-bar-item d-flex align-items-center mb-2">
+                    <div class="rating-label">2 Yıldız</div>
+                    <div class="progress mx-2" style="height: 10px; flex-grow: 1;">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div class="rating-count">0</div>
+                  </div>
+                  <div class="rating-bar-item d-flex align-items-center">
+                    <div class="rating-label">1 Yıldız</div>
+                    <div class="progress mx-2" style="height: 10px; flex-grow: 1;">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div class="rating-count">0</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Yorumlar Listesi -->
+          <div class="reviews-list">
+            <div class="review-item mb-4 pb-4 border-bottom">
+              <div class="d-flex">
+                <div class="review-author-avatar me-3">
+                  <i class="fas fa-user-circle fa-3x text-muted"></i>
+                </div>
+                <div class="review-content">
+                  <div class="review-header d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="review-author h6 mb-0">Ahmet Yılmaz</h4>
+                    <div class="review-rating">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="review-date mb-2">
+                    <small class="text-muted">12 Mayıs 2023</small>
+                  </div>
+                  <div class="review-text">
+                    <p>Harika bir ürün! Zeytinyağı gerçekten çok kaliteli ve lezzetli. Şimdi evimizde başka zeytinyağı kullanmıyoruz. Yemeklerde müthiş bir tat veriyor, salatalarda ise müthiş bir lezzet katıyor.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="review-item mb-4 pb-4 border-bottom">
+              <div class="d-flex">
+                <div class="review-author-avatar me-3">
+                  <i class="fas fa-user-circle fa-3x text-muted"></i>
+                </div>
+                <div class="review-content">
+                  <div class="review-header d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="review-author h6 mb-0">Ayşe Kaya</h4>
+                    <div class="review-rating">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="far fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="review-date mb-2">
+                    <small class="text-muted">25 Nisan 2023</small>
+                  </div>
+                  <div class="review-text">
+                    <p>Ürünün kalitesi gerçekten çok iyi. Hızlı kargo için de ayrıca teşekkürler. Ambalajı biraz daha kullanışlı olabilirdi, o yüzden 4 yıldız veriyorum.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="review-item">
+              <div class="d-flex">
+                <div class="review-author-avatar me-3">
+                  <i class="fas fa-user-circle fa-3x text-muted"></i>
+                </div>
+                <div class="review-content">
+                  <div class="review-header d-flex justify-content-between align-items-center mb-2">
+                    <h4 class="review-author h6 mb-0">Mehmet Demir</h4>
+                    <div class="review-rating">
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                      <i class="fas fa-star text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="review-date mb-2">
+                    <small class="text-muted">10 Mart 2023</small>
+                  </div>
+                  <div class="review-text">
+                    <p>Bu zeytinyağını denedikten sonra başka marka kullanmam artık. Gerçek zeytinyağı tadı! Özellikle kahvaltılarımızın vazgeçilmezi oldu. Siparişim çok hızlı geldi, paketleme de gayet iyiydi. Teşekkürler.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- İlişkili Ürünler -->
+    <div class="related-products mt-5">
+      <h2 class="section-title">İlgili Ürünler</h2>
+      
+      <div class="row">
+        <div class="col-md-6 col-lg-3 mb-4" *ngFor="let relatedProduct of relatedProducts">
+          <div class="product-card h-100">
+            <div class="position-relative">
+              <img [src]="relatedProduct.image || 'assets/images/products/placeholder.jpg'" class="card-img-top product-img" [alt]="relatedProduct.name">
+              <button class="btn btn-add-to-cart" (click)="addRelatedProductToCart(relatedProduct.id)">
+                <i class="fas fa-shopping-cart"></i>
+              </button>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title h5">{{ relatedProduct.name }}</h3>
+              <p class="product-description">{{ relatedProduct.description }}</p>
+              <div class="d-flex justify-content-between align-items-center mt-3">
+                <span class="product-price">{{ relatedProduct.price | currency:'TRY':'symbol-narrow':'.0-0' }}</span>
+                <a [routerLink]="['/products', relatedProduct.id]" class="btn btn-outline-primary btn-sm">İncele</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

@@ -1,0 +1,234 @@
+@use '../../../../_variables.scss' as *;
+
+// Hero Banner
+.hero-banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/hero-zeytinyagi.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+// Bölüm Başlıkları
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $primary;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 3px;
+    background-color: $primary;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+  margin-top: 25px;
+}
+
+// Kategori Kartları
+.category-card {
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+  display: block;
+  
+  &:hover {
+    transform: translateY(-10px);
+    
+    .category-icon {
+      background-color: $primary;
+      color: white;
+    }
+    
+    .card-title {
+      color: $primary;
+    }
+  }
+  
+  .category-icon {
+    width: 70px;
+    height: 70px;
+    background-color: rgba($primary, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-size: 1.8rem;
+    color: $primary;
+    transition: all 0.3s ease;
+  }
+  
+  .card-title {
+    transition: color 0.3s ease;
+  }
+}
+
+// Ürün Kartları
+.product-card {
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  
+  &:hover {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    
+    .product-img {
+      transform: scale(1.05);
+    }
+    
+    .btn-add-to-cart {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .product-img {
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .product-description {
+    font-size: 0.9rem;
+    color: #666;
+    height: 60px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $primary;
+  }
+  
+  .btn-add-to-cart {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: $primary;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    border: none;
+    z-index: 10;
+    
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}
+
+// Feature Cards
+.feature-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    
+    .feature-icon {
+      background-color: $primary;
+      color: white;
+    }
+  }
+  
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+    background-color: rgba($primary, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: $primary;
+    transition: all 0.3s ease;
+  }
+}
+
+// Müşteri Yorumları
+.testimonial-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .testimonial-rating {
+    color: #FFD700;
+  }
+  
+  .testimonial-text {
+    font-style: italic;
+    color: #666;
+    line-height: 1.6;
+  }
+}
+
+// CTA Section
+.section-cta {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/assets/images/cta-zeytin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+// Responsive for small screens
+@media (max-width: 991.98px) {
+  .hero-banner {
+    height: 500px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .product-card {
+    .btn-add-to-cart {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero-banner {
+    height: 400px;
+  }
+}

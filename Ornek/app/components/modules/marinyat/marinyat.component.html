@@ -1,0 +1,304 @@
+<div class="container p-0 mainBody" style="border-right: 1px dashed #6ec7ff; border-left: 1px dashed #6ec7ff;">
+  <!-- Hero Section - Slider -->
+  <section class="hero-section">
+    <div id="marineCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#marineCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#marineCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#marineCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="7000">
+          <div class="carousel-content">
+            <div class="container py-md-5">
+              <div class="row py-lg-5">
+                <div class="col-lg-7 mt-lg-5 ms-5">
+                  <h1 class="mb-3">Lüks Yat Kiralama Hizmetleri</h1>
+                  <p class="lead mb-4">Türkiye'nin en güzel kıyılarında unutulmaz bir deniz deneyimi için üstün kalitede deniz araçları ve profesyonel hizmet.</p>
+                  <div class="d-grid gap-3 d-md-flex">
+                    <button class="btn btn-lg btn-marine px-4 me-md-2">
+                      <i class="fas fa-anchor me-2"></i>Hemen Rezervasyon Yap
+                    </button>
+                    <button class="btn btn-lg btn-outline-light px-4">
+                      <i class="fas fa-phone-alt me-2"></i>İletişime Geç
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="7000">
+          <div class="carousel-content">
+            <div class="container py-md-5">
+              <div class="row py-lg-5">
+                <div class="col-lg-7 mt-lg-5 ms-5">
+                  <h1 class="mb-3">Premium Yat Satış Hizmetleri</h1>
+                  <p class="lead mb-4">Dünya standartlarında yat satış hizmetlerimizle hayalinizdeki yata sahip olmanın ayrıcalığını yaşayın.</p>
+                  <div class="d-grid gap-3 d-md-flex">
+                    <button class="btn btn-lg btn-marine px-4 me-md-2">
+                      <i class="fas fa-ship me-2"></i>Satılık Yatları Görüntüle
+                    </button>
+                    <button class="btn btn-lg btn-outline-light px-4">
+                      <i class="fas fa-tag me-2"></i>Fiyat Teklifi Al
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="7000">
+          <div class="carousel-content">
+            <div class="container py-md-5">
+              <div class="row py-lg-5">
+                <div class="col-lg-7 mt-lg-5 ms-5">
+                  <h1 class="mb-3">Mavi Tur & Özel Rotalar</h1>
+                  <p class="lead mb-4">Kişiselleştirilmiş rota planlaması ve profesyonel ekibimizle eşsiz mavi tur deneyimi yaşayın.</p>
+                  <div class="d-grid gap-3 d-md-flex">
+                    <button class="btn btn-lg btn-marine px-4 me-md-2">
+                      <i class="fas fa-route me-2"></i>Tur Rotalarını İncele
+                    </button>
+                    <button class="btn btn-lg btn-outline-light px-4">
+                      <i class="fas fa-map-marked-alt me-2"></i>Özel Tur Planla
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#marineCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Önceki</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#marineCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Sonraki</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <svg class="wave-divider" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none">
+    <path fill="#f8fcff" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+  </svg>
+
+  <!-- Yat Koleksiyonu -->
+  <section id="yatKoleksiyonu" class="section-marine">
+    <div class="container">
+      <h2 class="section-heading text-center mb-5">Yat Koleksiyonumuz</h2>
+      <div class="row g-4">
+
+        <!-- Yat Kartları - *ngFor ile dinamik oluşturulacak -->
+        <div class="col-md-6 col-lg-4" *ngFor="let yacht of yachts; let i = index">
+          <div class="marine-card h-100">
+            <div class="placeholder-image" style="height: 200px;">
+              <!-- Yat görseli buraya gelecek, şimdilik placeholder -->
+              {{ yacht.image ? '' : 'Yat Görseli' }}
+              <img *ngIf="yacht.image" [src]="yacht.image" alt="{{ yacht.name }}" class="img-fluid">
+            </div>
+            <div class="card-body d-flex flex-column">
+              <h3 class="card-title">{{ yacht.name }}</h3>
+              <div class="yacht-specs mb-3 flex-grow-1">
+                <div class="mb-1"><i class="fas fa-ruler-combined"></i> <span>Uzunluk: {{ yacht.size }}</span></div>
+                <div class="mb-1"><i class="fas fa-users"></i> <span>Kapasite: {{ yacht.capacity }}</span></div>
+                <div class="mb-1"><i class="fas fa-bed"></i> <span>Kamaralar: {{ yacht.cabins }}</span></div>
+                <div class="mb-1"><i class="fas fa-user-tie"></i> <span>Mürettebat: {{ yacht.crew }}</span></div>
+                <div class="mb-1"><i class="far fa-calendar-alt"></i> <span>Yıl: {{ yacht.year }}</span></div>
+              </div>
+              <div class="d-flex justify-content-between align-items-center mt-auto">
+                <span class="text-marine fw-bold">{{ yacht.price | currency:'TRY':'symbol-narrow':'1.0-0' }} / gün</span>
+                <!-- Özellik veya kategori rozeti eklenebilir -->
+              </div>
+              <div class="mt-3">
+                <!-- Button trigger modal -->
+                <button type="button" 
+                        class="btn btn-outline-marine w-100" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#yachtDetailModal" 
+                        (click)="showYachtDetails(yacht)">
+                  Detaylar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="text-center mt-5">
+        <button class="btn btn-marine px-4">Tüm Yatları Görüntüle</button> <!-- Bu butonun işlevi daha sonra eklenebilir -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Hizmetlerimiz -->
+  <section id="hizmetlerimiz" class="section-marine blue-bg">
+    <div class="container">
+      <h2 class="section-heading text-center mb-5">Sunduğumuz Hizmetler</h2>
+      <div class="row g-4">
+        <!-- Hizmet 1 -->
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="icon-wrapper mx-auto">
+            <i class="fas fa-ship fa-2x text-marine"></i>
+          </div>
+          <h3 class="h4 mb-3">Yat Kiralama</h3>
+          <p>Günlük, haftalık veya aylık olarak lüks yat kiralama seçenekleri sunuyoruz. Her bütçeye uygun çözümler.</p>
+        </div>
+        <!-- Hizmet 2 -->
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="icon-wrapper mx-auto">
+            <i class="fas fa-hand-holding-usd fa-2x text-marine"></i>
+          </div>
+          <h3 class="h4 mb-3">Yat Satış</h3>
+          <p>Sıfır ve ikinci el yat satış hizmeti. Yüksek kaliteli tekneler, güvenilir alım-satım süreci.</p>
+        </div>
+        <!-- Hizmet 3 -->
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="icon-wrapper mx-auto">
+            <i class="fas fa-route fa-2x text-marine"></i>
+          </div>
+          <h3 class="h4 mb-3">Özel Turlar</h3>
+          <p>Özel gezi rotaları, mavi yolculuk turları ve profesyonel rehberlik hizmetleri sunuyoruz.</p>
+        </div>
+        <!-- Hizmet 4 -->
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="icon-wrapper mx-auto">
+            <i class="fas fa-tools fa-2x text-marine"></i>
+          </div>
+          <h3 class="h4 mb-3">Bakım & Onarım</h3>
+          <p>Profesyonel ekibimizle yat bakım ve onarım hizmetleri. Piyasada en kaliteli servis garantisi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+   
+  <section id="kiralamaAdimlar" class="section-marine">
+    <div class="container">
+      <h2 class="section-heading text-center mb-5">Kiralama Süreci</h2>
+      <div class="row g-4">
+
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="step-number mx-auto text-light">1</div>
+          <h3 class="h4 mb-3">İletişime Geçin</h3>
+          <p>Telefon, e-posta veya web sitemiz üzerinden bizimle iletişime geçin ve ihtiyaçlarınızı belirtin.</p>
+        </div>
+
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="step-number mx-auto text-light">2</div>
+          <h3 class="h4 mb-3">Tekne Seçin</h3>
+          <p>Size sunduğumuz tekne ve yat seçenekleri arasından ihtiyaçlarınıza en uygun olanı seçin.</p>
+        </div>
+
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="step-number mx-auto text-light">3</div>
+          <h3 class="h4 mb-3">Rezervasyon Yapın</h3>
+          <p>Belirlediğiniz tarihler için rezervasyon yapın ve ön ödemeyi gerçekleştirin.</p>
+        </div>
+
+        <div class="col-md-6 col-lg-3 text-center">
+          <div class="step-number mx-auto text-light">4</div>
+          <h3 class="h4 mb-3">Denize Açılın</h3>
+          <p>Belirtilen tarihte gelip yatınızı teslim alın ve unutulmaz bir deniz yolculuğuna başlayın.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+ 
+  <section id="iletisim" class="section-marine blue-bg">
+    <div class="container">
+      <h2 class="section-heading text-center mb-5">İletişim Bilgilerimiz</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <h3 class="h4 mb-3">Bize Ulaşın</h3>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-phone me-2"></i>
+            <a href="tel:+902422590001">+90 (242) 259 00 01</a>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-phone me-2"></i>
+            <a href="tel:+902422590002">+90 (242) 259 00 02</a>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-envelope me-2"></i>
+            <a href="mailto:info&#64;marinyat.com">info&#64;marinyat.com</a>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-envelope me-2"></i>
+            <a href="mailto:satis&#64;marinyat.com">satis&#64;marinyat.com</a>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h3 class="h4 mb-3">Merkez Ofisimiz</h3>
+          <div class="d-flex align-items-center mb-3">
+            <i class="fas fa-map-marker-alt me-2"></i>
+            <div>
+              Marina Caddesi No:123<br>
+              Konyaaltı / Antalya<br>
+              Türkiye
+            </div>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <i class="far fa-clock me-2"></i>
+            <div>
+              Pazartesi - Cumartesi: 09:00 - 19:00<br>
+              Pazar: 10:00 - 16:00
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div> 
+-->
+
+  <!-- Tek Yat Detay Modalı -->
+  <div class="modal fade" id="yachtDetailModal" tabindex="-1" role="dialog" aria-labelledby="yachtDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+      <div class="modal-content" *ngIf="selectedYacht">
+        <div class="modal-header">
+          <h5 class="modal-title" id="yachtDetailModalLabel">{{ selectedYacht.name }} Detayları</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="placeholder-image mb-3" style="height: 300px;">
+                <!-- Modal içindeki yat görseli -->
+                 {{ selectedYacht.image ? '' : 'Yat Görseli' }}
+                 <img *ngIf="selectedYacht.image" [src]="selectedYacht.image" alt="{{ selectedYacht.name }}" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <h4>Teknik Özellikler</h4>
+              <ul class="list-unstyled">
+                <li><i class="fas fa-ruler-combined me-2 text-marine"></i> <strong>Uzunluk:</strong> {{ selectedYacht.size }}</li>
+                <li><i class="fas fa-users me-2 text-marine"></i> <strong>Kapasite:</strong> {{ selectedYacht.capacity }}</li>
+                <li><i class="fas fa-bed me-2 text-marine"></i> <strong>Kamaralar:</strong> {{ selectedYacht.cabins }}</li>
+                <li><i class="fas fa-user-tie me-2 text-marine"></i> <strong>Mürettebat:</strong> {{ selectedYacht.crew }}</li>
+                <li><i class="far fa-calendar-alt me-2 text-marine"></i> <strong>Yıl:</strong> {{ selectedYacht.year }}</li>
+              </ul>
+              <h4>Öne Çıkan Özellikler</h4>
+              <ul *ngIf="selectedYacht.features && selectedYacht.features.length > 0" class="list-unstyled">
+                  <li *ngFor="let feature of selectedYacht.features"><i class="fas fa-check-circle me-2 text-success"></i> {{ feature }}</li>
+              </ul>
+               <p *ngIf="!selectedYacht.features || selectedYacht.features.length === 0">Belirtilen ek özellik bulunmamaktadır.</p>
+               <h4 class="mt-3">Günlük Fiyat</h4>
+               <p class="fs-5 text-marine fw-bold">{{ selectedYacht.price | currency:'TRY':'symbol-narrow':'1.0-0' }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button type="button" class="btn btn-marine">Rezervasyon Yap</button> <!-- Rezervasyon işlevi eklenebilir -->
+        </div>
+      </div>
+    </div>
+  </div>

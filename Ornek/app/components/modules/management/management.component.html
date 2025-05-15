@@ -1,0 +1,91 @@
+<div class="container py-5 mainBody" style="border-right: 1px dashed #6ec7ff; border-left: 1px dashed #6ec7ff;">
+  <!-- Sayfa Başlığı -->
+  <div class="row mb-5">
+    <div class="col-12 text-center">
+      <h1 class="section-heading text-center">Yönetim Kurulumuz</h1>
+      <p class="lead text-muted">Deneyimli liderler ile başarıya yelken açıyoruz</p>
+    </div>
+  </div>
+
+  <!-- Yönetim Kurulu Başkanı -->
+  <div class="row align-items-center mb-5">
+    <div class="col-lg-4 mb-4 mb-lg-0">
+      <div class="image-placeholder rounded shadow" style="min-height: 400px;"></div>
+    </div>
+    <div class="col-lg-8">
+      <h2 class="section-heading">{{ boardMembers[0].name }}</h2>
+      <p class="text-marine h5 mb-3">{{ boardMembers[0].position }}</p>
+      <p class="mb-4">{{ boardMembers[0].bio }}</p>
+      <p>Marina Yat Limanı'nın kurucularından olan Ali Bey, şirketimizi 25 yıldır başarıyla yönetmektedir. Vizyoner liderliği ve denizcilik sektöründeki engin bilgisiyle, şirketimizin büyümesine ve gelişmesine öncülük etmektedir.</p>
+      <div class="mt-3">
+        <a href="#" class="text-marine me-3"><i class="bi bi-linkedin fs-5"></i></a>
+        <a href="#" class="text-marine"><i class="bi bi-envelope fs-5"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Yönetim Kurulu Üyeleri -->
+  <h3 class="section-heading text-center mt-5">Yönetim Kurulu Üyelerimiz</h3>
+  <div class="row g-4 mt-3">
+    <div class="col-md-6 mb-4" *ngFor="let member of boardMembers.slice(1)">
+      <div class="card marine-card h-100">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <div class="image-placeholder h-100" style="border-radius: 8px 0 0 8px; border-right: none;"></div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body p-4">
+              <h3 class="h5 card-title">{{ member.name }}</h3>
+              <p class="text-marine mb-2">{{ member.position }}</p>
+              <p class="card-text small">{{ member.bio }}</p>
+              <div class="mt-2">
+                <a href="#" class="text-marine me-2"><i class="bi bi-linkedin"></i></a>
+                <a href="#" class="text-marine"><i class="bi bi-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Organizasyon Şeması -->
+  <div class="section-marine blue-bg py-5 rounded mt-5">
+    <div class="container">
+      <h2 class="section-heading text-center">Organizasyon Yapımız</h2>
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="image-placeholder rounded shadow" style="min-height: 350px;">
+            <!-- Buraya organizasyon şeması yerleştirilecek -->
+          </div>
+          <p class="text-center mt-3">Marina Yat Limanı organizasyon yapısı, müşteri memnuniyetini ve operasyonel mükemmelliği temel alan bir anlayışla tasarlanmıştır.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Temel Değerlerimiz -->
+  <div class="section-marine mt-5">
+    <div class="container">
+      <h2 class="section-heading text-center">Kurumsal Politikamız</h2>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card marine-card h-100">
+            <div class="card-body p-4">
+              <h3 class="h5 mb-3"><i class="bi bi-bullseye text-marine me-2"></i> Misyonumuz</h3>
+              <p>Dünya standartlarında marinacılık hizmetleri sunarak, deniz tutkunlarının memnuniyetini en üst düzeyde tutmak ve sektörde öncü olmak.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card marine-card h-100">
+            <div class="card-body p-4">
+              <h3 class="h5 mb-3"><i class="bi bi-eye text-marine me-2"></i> Vizyonumuz</h3>
+              <p>Türkiye'nin ve bölgenin en prestijli marina işletmecisi olarak, yenilikçi hizmetlerimizle global denizcilik sektöründe söz sahibi olmak.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

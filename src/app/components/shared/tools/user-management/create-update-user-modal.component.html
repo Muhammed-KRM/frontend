@@ -1,0 +1,39 @@
+<div *ngIf="currentUser" class="container">
+  <!-- Hata ve Mesaj Gösterimi -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+  <div *ngIf="Message" class="alert alert-success">{{ Message }}</div>
+
+  <form (ngSubmit)="saveUser()">
+    <div class="mb-3">
+      <label class="form-label">Kullanıcı Adı</label>
+      <input type="text" class="form-control" [(ngModel)]="currentUser.userName" name="userName" required>
+    </div>
+    <!-- Sadece create modunda gösterilecek şifre alanı -->
+    <div class="mb-3" *ngIf="modalMode === 'create'">
+      <label class="form-label">Şifre</label>
+      <input type="password" class="form-control" [(ngModel)]="currentUser.password" name="password" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Profil Resmi URL</label>
+      <input type="text" class="form-control" [(ngModel)]="currentUser.userImageLink" name="userImageLink">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Durum</label>
+      <select class="form-select" [(ngModel)]="currentUser.state" name="state" required>
+        <option [ngValue]="true">Aktif</option>
+        <option [ngValue]="false">Pasif</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Rol</label>
+      <select class="form-select" [(ngModel)]="currentUser.userRoleinAuthorization" name="userRoleinAuthorization" required *ngIf="userRoleOptions?.length">
+        <option *ngFor="let role of userRoleOptions" [ngValue]="role.value">{{role.display}}</option>
+      </select>
+      <div *ngIf="!userRoleOptions?.length">Rol seçenekleri yüklenemedi.</div>
+    </div>
+    <div class="d-flex justify-content-between">
+      <button type="submit" class="btn btn-primary">{{ modalMode === 'create' ? 'Oluştur' : 'Güncelle' }}</button>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+    </div>
+  </form>
+</div>

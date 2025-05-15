@@ -1,0 +1,76 @@
+<!-- Üst Bar (Top Bar) 
+<div class="top-bar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <span class="top-info"><i class="bi bi-telephone me-2"></i>+90 555 123 4567</span>
+        <span class="top-info ms-3"><i class="bi bi-whatsapp me-2"></i>WhatsApp</span>
+      </div>
+      <div class="col-md-6 text-end">
+        <a href="#" class="top-link ms-3">İletişime Geçin</a>
+      </div>
+    </div>
+  </div>
+</div>
+--
+
+<!-- Ana Navbar -->
+<nav class="navbar">
+  <div class="container-fluid">
+    <div class="navbar-brand">
+      <a routerLink="/" class="logo">Logo</a>
+    </div>
+
+    <!-- Hamburger Menu Toggle Button -->
+    <button class="menu-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen" aria-label="Toggle navigation">
+      <span class="icon-bar"></span>
+    </button>
+
+    <!-- Overlay - Menü açıldığında arka planı karartmak için -->
+    <div class="menu-overlay" [class.active]="isMenuOpen" (click)="toggleMenu()"></div>
+
+    <!-- Yandan açılan canvas menü - isMenuOpen true olduğunda active class ekleniyor -->
+    <div class="navbar-menu" [class.active]="isMenuOpen">
+      <div class="menu-header">
+        <div class="logo">Logo</div>
+        <button class="close-menu" (click)="toggleMenu()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+      <ul class="nav-links">
+        <li class="nav-item">
+          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Ana Sayfa</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/about" routerLinkActive="active">Hakkımızda</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/management" routerLinkActive="active">Yönetim Kurulu</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/asmaev" routerLinkActive="active">Asmalı Ev (Bağ Evi)</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/marinyat" routerLinkActive="active">Marin Yat</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/projects" routerLinkActive="active">Projeler</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/contact" routerLinkActive="active">İletişim</a>
+        </li>
+      </ul>
+      <div class="menu-footer">
+        <div class="social-icons">
+          <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+        </div>
+        <div class="contact-info mt-3">
+          <p><i class="bi bi-telephone-fill me-2"></i>+90 555 123 4567</p>
+          <p><i class="bi bi-envelope-fill me-2"></i>info&#64;sirket.com</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,181 @@
+<div class="container my-5">
+  <!-- Başlık Banner -->
+  <section class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="page-title">Hakkımızda</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Hakkımızda</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hikayemiz -->
+  <section class="about-story py-5">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="about-image position-relative">
+          <img src="assets/images/about/about-story.jpg" alt="Zeytinliklerimiz" class="img-fluid rounded shadow">
+          <div class="experience-badge">
+            <span class="years">25</span>
+            <span class="text">Yıllık<br>Deneyim</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="section-title text-start">
+          <h2>Hikayemiz</h2>
+        </div>
+        <p class="lead mb-4">1998'den beri Ayvalık'ın bereketli topraklarında en kaliteli zeytinyağını üretiyoruz.</p>
+        <p>Şirketimiz, zeytin yetiştiriciliği konusunda uzman bir aile tarafından kuruldu. Yıllardır sürdürdüğümüz geleneksel hasat ve üretim tekniklerini, modern teknoloji ile birleştirerek en kaliteli zeytinyağını sizlere sunuyoruz.</p>
+        <p>Zeytin ağaçlarımızın tamamı organik tarım prensiplerine uygun olarak yetiştirilmekte ve hasat edilen zeytinler aynı gün içinde soğuk sıkım yöntemiyle işlenmektedir. Bu sayede zeytinyağımızın besin değerlerini ve doğal aromasını en üst düzeyde koruyoruz.</p>
+        <p>Misyonumuz, Akdeniz mutfağının vazgeçilmez lezzeti olan zeytinyağını en saf ve doğal haliyle sofralarınıza ulaştırmaktır. Vizyonumuz ise, yüksek kaliteli Türk zeytinyağını tüm dünyaya tanıtmak ve global pazarda ülkemizi en iyi şekilde temsil etmektir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Değerlerimiz -->
+  <section class="about-values py-5 bg-light">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h2>Değerlerimiz</h2>
+        <p class="section-subtitle">İlkelerimize bağlı kalarak ürünlerimizi üretiyoruz</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" *ngFor="let value of values">
+          <div class="value-card h-100 p-4 bg-white rounded shadow-sm text-center">
+            <div class="value-icon mb-3">
+              <i [class]="value.icon"></i>
+            </div>
+            <h3 class="value-title h5 mb-3">{{value.title}}</h3>
+            <p class="value-description mb-0">{{value.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dönüm Noktalarımız -->
+  <section class="about-milestones py-5">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h2>Dönüm Noktalarımız</h2>
+        <p class="section-subtitle">Yıllar içindeki gelişimimiz</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" *ngFor="let milestone of milestones; let i = index" [class.right]="i % 2 !== 0">
+          <div class="timeline-badge">{{milestone.year}}</div>
+          <div class="timeline-panel">
+            <div class="timeline-heading">
+              <h4 class="timeline-title">{{milestone.title}}</h4>
+            </div>
+            <div class="timeline-body">
+              <p>{{milestone.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Üretim Sürecimiz -->
+  <section class="about-process py-5 bg-light">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h2>Üretim Sürecimiz</h2>
+        <p class="section-subtitle">Zeytinliklerden sofralarınıza kadar olan yolculuk</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="process-card text-center">
+            <div class="process-icon mb-3">
+              <i class="fas fa-seedling"></i>
+            </div>
+            <h3 class="process-title h5">Yetiştirme</h3>
+            <p>Organik tarım ilkelerine uygun olarak zeytin ağaçlarımızı özenle yetiştiriyoruz.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="process-card text-center">
+            <div class="process-icon mb-3">
+              <i class="fas fa-hand-paper"></i>
+            </div>
+            <h3 class="process-title h5">Hasat</h3>
+            <p>Zeytinlerimizi elle hasat ederek, her bir zeytinin zarar görmemesini sağlıyoruz.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="process-card text-center">
+            <div class="process-icon mb-3">
+              <i class="fas fa-oil-can"></i>
+            </div>
+            <h3 class="process-title h5">Soğuk Sıkım</h3>
+            <p>24 saat içinde soğuk sıkım yöntemiyle zeytinlerimizi işliyoruz.</p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="process-card text-center">
+            <div class="process-icon mb-3">
+              <i class="fas fa-flask"></i>
+            </div>
+            <h3 class="process-title h5">Kalite Kontrol</h3>
+            <p>Laboratuvar testleri ile zeytinyağımızın kalitesini garanti altına alıyoruz.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-12 text-center">
+          <a routerLink="/products" class="btn btn-primary">Ürünlerimizi Keşfedin</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ekibimiz -->
+  <section class="about-team py-5">
+    <div class="container">
+      <div class="section-title text-center mb-5">
+        <h2>Ekibimiz</h2>
+        <p class="section-subtitle">Kaliteyi bir araya getiren uzman kadromuz</p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3" *ngFor="let member of team">
+          <div class="team-card h-100">
+            <div class="team-image">
+              <img [src]="member.image" [alt]="member.name" class="img-fluid">
+              <div class="team-social">
+                <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+              </div>
+            </div>
+            <div class="team-info p-3 text-center">
+              <h3 class="team-name h5 mb-1">{{member.name}}</h3>
+              <p class="team-position text-muted mb-2">{{member.position}}</p>
+              <p class="team-bio mb-0">{{member.bio}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Çağrı -->
+  <section class="cta-section py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-white mb-4">Kaliteli Zeytinyağı Deneyimi İçin</h2>
+          <p class="text-white mb-4">Doğal, sağlıklı ve lezzetli zeytinyağlarımızı deneyin, farkı hissedin.</p>
+          <a routerLink="/contact" class="btn btn-light btn-lg">Bize Ulaşın</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

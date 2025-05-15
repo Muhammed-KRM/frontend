@@ -1,0 +1,149 @@
+<div class="container-fluid p-0 mainBody">
+  <!-- Başlık Banner -->
+  <section class="page-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="page-title">{{ categoryParam ? categoryParam : 'Tüm Ürünler' }}</h1>
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Ana Sayfa</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{ categoryParam ? categoryParam : 'Ürünler' }}</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container my-5">
+    <div class="row">
+      <!-- Sidebar - Kategoriler ve Filtreler -->
+      <div class="col-lg-3 mb-4">
+        <!-- Kategoriler -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3 class="h5 mb-0">Kategoriler</h3>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center"
+                  [class.active]="selectedCategory === ''" 
+                  (click)="onCategorySelect('')">
+                Tüm Ürünler
+                <span class="badge bg-primary rounded-pill">{{ products.length }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center" 
+                  *ngFor="let category of categories"
+                  [class.active]="selectedCategory === category.name"
+                  (click)="onCategorySelect(category.name)">
+                {{ category.name }}
+                <span class="badge bg-primary rounded-pill">
+                  {{ getCategoryProductCount(category.name) }}
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Filtreler -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="h5 mb-0">Filtrele & Sırala</h3>
+          </div>
+          <div class="card-body">
+            <div class="form-group mb-3">
+              <label for="sortOrder" class="form-label">Sıralama</label>
+              <select class="form-select" id="sortOrder" [(ngModel)]="sortOrder" (change)="onSortChange(sortOrder)">
+                <option value="latest">En Son Eklenen</option>
+                <option value="priceAsc">Fiyata Göre Artan</option>
+                <option value="priceDesc">Fiyata Göre Azalan</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ürün Listesi -->
+      <div class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="h4 mb-0">{{ filteredProducts.length }} Ürün gösteriliyor</h2>
+          <div class="d-flex align-items-center">
+            <div class="btn-group view-options" role="group">
+              <button type="button" class="btn btn-outline-secondary active">
+                <i class="fas fa-th-large"></i>
+              </button>
+              <button type="button" class="btn btn-outline-secondary">
+                <i class="fas fa-list"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Yükleniyor Göstergesi -->
+        <div *ngIf="loading" class="text-center py-5">
+          <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Yükleniyor...</span>
+          </div>
+          <p class="mt-2">Ürünler yükleniyor...</p>
+        </div>
+
+        <!-- Hata Mesajı -->
+        <div *ngIf="error" class="alert alert-danger">
+          {{ error }}
+        </div>
+
+        <!-- Ürün Kartları -->
+        <div *ngIf="!loading && !error" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <div class="col" *ngFor="let product of filteredProducts">
+            <div class="card h-100 product-card">
+              <div class="position-relative">
+                <!-- Ürün görseli yoksa placeholder göster -->
+                <img *ngIf="product.image" [src]="product.image" class="card-img-top product-img" [alt]="product.name">
+                <div *ngIf="!product.image" class="card-img-top product-img-placeholder d-flex align-items-center justify-content-center">
+                  <i class="fas fa-image fa-3x text-muted"></i>
+                </div>
+                <!-- Sepete Ekle butonu -->
+                <button class="btn btn-add-to-cart" (click)="addToCart(product)">
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title h5">{{ product.name }}</h3>
+                <p class="card-text product-description">{{ product.description }}</p>
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                  <span class="product-price">{{ product.price | currency:'TRY':'symbol-narrow':'.0-0' }}</span>
+                  <a [routerLink]="['/products', product.id]" class="btn btn-outline-primary btn-sm">İncele</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ürün Bulunamadı -->
+        <div *ngIf="!loading && !error && filteredProducts.length === 0" class="text-center py-5">
+          <i class="fas fa-box-open fa-4x text-muted mb-3"></i>
+          <h3 class="h5">Ürün Bulunamadı</h3>
+          <p class="text-muted">Arama kriterlerinize uygun ürün bulunmamaktadır.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Geyikli Zeytin Yağı Hakkında -->
+  <section class="bg-light py-5 mt-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <h2 class="h3 mb-4">Geyikli Zeytinyağı Hakkında</h2>
+          <p>Geyikli'den sofranıza zeytin ve zeytinyağı doğal ürünler. Lezzeti sofranıza taşımak için geldik. Tamamen doğal, katkısız ve yüksek kaliteli zeytinyağlarımız ile sağlıklı yaşama katkıda bulunuyoruz.</p>
+          <p>Ege bölgesinde yetişen zeytinlerin soğuk sıkım yöntemiyle elde edilen zeytinyağlarını sizlere sunuyoruz. En iyi kalitede zeytinyağı ve zeytinleri sizin için titizlikle hazırlıyoruz.</p>
+          <a routerLink="/about" class="btn btn-primary mt-3">Daha Fazla Bilgi</a>
+        </div>
+        <div class="col-lg-6">
+          <img src="assets/images/about-zeytin.jpg" alt="Zeytin Ağacı" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+</div> 

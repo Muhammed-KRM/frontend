@@ -1,0 +1,240 @@
+<div class="container py-5">
+  <div class="row mb-5">
+    <div class="col-12">
+      <!-- Admin Admin Tools -->
+      <div class="card mb-4 shadow-sm border-0 rounded-3 hover-effect">
+        <div class="card-header bg-primary text-white rounded-top-3">
+          <h5 class="mb-0"><i class="bi bi-shield-lock me-2"></i>Admin Admin Tools</h5>
+        </div>
+        <div class="card-body">
+          <div class="grid-nav">
+            <div class="grid-nav-row d-flex gap-3">
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#AdminSigninModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-person-plus-fill fs-2 text-primary"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Admin Signin</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Tools -->
+      <div class="card mb-4 shadow-sm border-0 rounded-3 hover-effect">
+        <div class="card-header bg-info text-white rounded-top-3">
+          <h5 class="mb-0"><i class="bi bi-gear me-2"></i>Admin Tools</h5>
+        </div>
+        <div class="card-body">
+          <div class="grid-nav">
+            <div class="grid-nav-row d-flex gap-3">
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#UsersManagementModal" >
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-people-fill fs-2 text-info"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Users Management</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#CreateUpdateUserModal" (click)="prepareCreateUserModal()">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-person-plus-fill fs-2 text-info"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Kullanıcı Oluştur</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#SystemLogModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-journal-text fs-2 text-info"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">System Log</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#UserReportsModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-file-earmark-text fs-2 text-info"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">User Reports</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Tools -->
+      <div class="card shadow-sm border-0 rounded-3 hover-effect">
+        <div class="card-header bg-success text-white rounded-top-3">
+          <h5 class="mb-0"><i class="bi bi-person me-2"></i>User Tools</h5>
+        </div>
+        <div class="card-body">
+          <div class="grid-nav">
+            <div class="grid-nav-row d-flex flex-wrap gap-3">
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#VideoPlayerModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-play-circle fs-2 text-success"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Video Player</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#TodoListModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-list-check fs-2 text-success"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Todo List</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#ReportModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-file-earmark-bar-graph fs-2 text-success"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Report</span>
+              </a>
+              <a href="#" class="grid-nav-item p-3 rounded-3 flex-fill text-center text-decoration-none" data-bs-toggle="modal" data-bs-target="#ChatModal">
+                <div class="grid-nav-icon mb-2">
+                  <i class="bi bi-chat-dots fs-2 text-success"></i>
+                </div>
+                <span class="grid-nav-content fw-medium">Chat</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modals -->
+  <!-- Admin Signin Modal -->
+  <div class="modal fade" id="AdminSigninModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Admin Signin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+            <app-admin-signin-modal></app-admin-signin-modal>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Users Management Modal -->
+  <div class="modal fade" id="UsersManagementModal" tabindex="-1" aria-labelledby="UsersManagementLabel" aria-hidden="true" >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+
+        <h5 class="modal-title" id="UsersManagementLabel">Users Management</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <app-user-management></app-user-management>
+          <!-- <app-user-management-update-modal></app-user-management-update-modal> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!-- Create/Update User Modal -->
+    <div class="modal fade" id="CreateUpdateUserModal" aria-labelledby="CreateUpdateUserLabel" aria-hidden="true" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="CreateUpdateUserLabel">Kullanıcı Oluştur / Güncelle</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            
+            <app-create-update-user-modal></app-create-update-user-modal>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- System Log Modal -->
+    <div class="modal fade" id="SystemLogModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">System Log</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Reports Modal -->
+    <div class="modal fade" id="UserReportsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">User Reports</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Video Player Modal -->
+    <div class="modal fade" id="VideoPlayerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Video Player</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Todo List Modal -->
+      <div class="modal fade" id="TodoListModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Todo List</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <!-- Report Modal -->
+  <div class="modal fade" id="ReportModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Reports</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat Modal -->
+  <div class="modal fade" id="ChatModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Chat</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+         
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+  <!-- Diğer modallar benzer şekilde eklenecek -->
+</div>
